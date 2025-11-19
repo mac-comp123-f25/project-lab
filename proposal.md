@@ -17,3 +17,8 @@ We create a set dictionary of questions and their correct responses.
 We all play sports and love trivia! 
 We want more people to learn more about sports. 
 
+## Plan
+We will separate the assignment into three main tasks; 
+1. Research on sports trivia to come up with questions and answers. 
+2. Create a dictionary corresponding to correct responses. 
+3. Write if statements to confirm right or wrong answers. 
