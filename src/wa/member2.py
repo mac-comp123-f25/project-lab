@@ -32,6 +32,9 @@ def choose_category(category):
 
 # ------------------- GUI WINDOW ------------------- #
 window = tk.Tk()
+
+# --------------------- WELCOME SCREEN --------------------- #
+welcome_window = tk.Tk()
 welcome_window.title("Welcome to Game On: Sports Trivia Challenge!")
 welcome_window.geometry("450x250")
 
@@ -51,32 +54,29 @@ start_button = tk.Button(
 )
 start_button.pack(pady=20)
 
+welcome_window.mainloop()
 
+# --------------------- CATEGORY WINDOW --------------------- #
+def open_category_window():
+    """Destroy welcome window and open category selection window."""
+    welcome_window.destroy()
 
-label = tk.Label(window, text="Select Trivia Category")
-label.pack(padx=20)
+    category_window = tk.Tk()
+    category_window.title("Select Trivia Category")
+    category_window.geometry("400x300")
 
-buttons = [
-("Football", "football"),
-    ("Soccer", "soccer"),
-    ("Baseball", "baseball"),
-    ("Basketball", "basketball"),
-]
+    label = tk.Label(category_window, text="Select Trivia Category", font=("Arial", 18))
+    label.pack(pady=20)
 
+    # Buttons for each category in TRIVIA_QUESTIONS
+    for category in TRIVIA_QUESTIONS.keys():
+        btn = tk.Button(
+            category_window,
+            text=category,
+            font=("Arial", 14),
+            width=20,
+            command=lambda c=category: (category_window.destroy(), run_trivia(c))
+        )
+        btn.pack(pady=10)
 
-for text, cat in buttons:
-    btn = tk.Button(
-        window,
-        text=text,
-        font=("Arial", 12),
-        width=15,
-        command=lambda c=cat: choose_category(c)
-    )
-    btn.pack(pady=5)
-
-window.mainloop()
-
-
-
-
-
+    category_window.mainloop()
