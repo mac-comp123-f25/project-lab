@@ -1,96 +1,57 @@
 import tkinter as tk
 
-questions = [
-    "Question 1:",
-    "Question 2:",
-    "Question 3:",
-    "Question 4:",
-    "Question 5:"
-] # INPUT ACTUAL QUESTIONS 
+TRIVIA_QUESTIONS = {
+    "Football": {
+        1: {"question":"Which nfl team became the first team to win six superbowls?",
+            "answer":"Steelers"},
+        2: {"question":"Who holds the nfl record for most career passing yards?",
+            "answer":"Chicago"},
+        3: {"question":"What year did the first superbowl take place?",
+            "answer":"1967"},
+        4: {"question":"Which player is known for the famous immaculate reception?",
+            "answer":"Franco Harris"},
+        5: {"question":"Which nfl franchise has the most regular season wins in franchise history?",
+            "answer":"Chicago"}
+    }
+}
 
-correct_answers = ["a", "b", "c", "d", "e"] # INPUT ACTUAL ANSWERS
+category = "Football"
+questions = [TRIVIA_QUESTIONS[category][i]["question"] for i in range(1, 6)]
+correct_answers = [TRIVIA_QUESTIONS[category][i]["answer"].lower() for i in range(1, 6)]
 
 def check_answers():
-    score = 0
-
     for i in range(5):
         user_answer = entries[i].get().strip().lower()
         if user_answer == correct_answers[i]:
             entries[i].config(bg="green")
-            score += 1
         else:
             entries[i].config(bg="red")
 
-    root.after(700, lambda: show_result(score))
-
-def show_result(score):
-    percent = int((score / 5) * 100)
-
-    quiz_frame.pack_forget()
-
-    for widget in result_frame.winfo_children():
-        widget.destroy()
-
-    if score == 5:
-        result_frame.config(bg="green")
-    else:
-        result_frame.config(bg=root.cget("bg"))
-
-    result_label = tk.Label(result_frame,
-                            text=f"Your Score: {percent}%",
-                            font=("Arial", 20),
-                            bg=result_frame.cget("bg"))
-    result_label.pack(pady=30)
-
-    back_button = tk.Button(result_frame,
-                            text="Go Back",
-                            font=("Arial", 12),
-                            command=go_back)
-    back_button.pack()
-
-    result_frame.pack(fill="both", expand=True)
-
-def go_back():
-    result_frame.config(bg=root.cget("bg"))
-    result_frame.pack_forget()
-
-    for entry in entries:
-        entry.delete(0, tk.END)
-        entry.config(bg="white")
-
-    quiz_frame.pack()
-
 root = tk.Tk()
 root.title("Football Trivia")
-root.geometry("350x300")
+root.geometry("500x300")
 
-
-quiz_frame = tk.Frame(root)
-quiz_frame.pack()
-
-title = tk.Label(quiz_frame, text="Football", font=("Arial", 16))
+title = tk.Label(root, text="Football", font=("Arial", 16))
 title.pack(pady=10)
 
-frame = tk.Frame(quiz_frame)
+frame = tk.Frame(root)
 frame.pack()
 
 entries = []
 
-for i, q in enumerate(questions):
+for i, question_text in enumerate(questions):
     row = tk.Frame(frame)
-    row.pack(pady=4)
+    row.pack(pady=4, anchor="w")
 
-    label = tk.Label(row, text=f"{i+1}. {q}", width=15, anchor="w")
+    label = tk.Label(row, text=f"{i+1}. {question_text}", wraplength=400, justify="left")
     label.pack(side="left")
 
-    entry = tk.Entry(row, width=10)
-    entry.pack(side="left")
+    entry = tk.Entry(row, width=20)
+    entry.pack(side="left", padx=10)
     entries.append(entry)
 
-button = tk.Button(quiz_frame, text="Submit", command=check_answers)
+button = tk.Button(root, text="Submit", command=check_answers)
 button.pack(pady=10)
-
-result_frame = tk.Frame(root)
 
 root.mainloop()
 
