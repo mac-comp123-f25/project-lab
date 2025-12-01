@@ -1,18 +1,9 @@
-from questions import TRIVIA_QUESTIONS
+from trivia_questions import TRIVIA_QUESTIONS
 import tkinter as tk
-
-from TRIVIA_QUESTIONS import (
-    football_questions,
-    soccer_questions,
-    baseball_questions,
-    basketball_questions
-)
 
 def run_trivia(TRIVIA_QUESTIONS):
     score = 0
     total = len(TRIVIA_QUESTIONS)
-
-    print("Welcome to Game On: Sports Trivia Challenge!")
 
     for question in TRIVIA_QUESTIONS.items():
         user = input(question).strip().lower()
@@ -30,19 +21,37 @@ def choose_category(category):
     window.destroy()
 
     if category == "football":
-        run_trivia(football_questions)
+        run_trivia("Football")
     elif category == "soccer":
-        run_trivia(soccer_questions)
+        run_trivia("Soccer")
     elif category == "baseball":
-        run_trivia(baseball_questions)
+        run_trivia("Baseball")
     else:
-        run_trivia(basketball_questions)
+        run_trivia("Basketball")
 
 
 # ------------------- GUI WINDOW ------------------- #
 window = tk.Tk()
-window.title("Select Trivia Category")
-window.geometry("350x200")
+welcome_window.title("Welcome to Game On: Sports Trivia Challenge!")
+welcome_window.geometry("450x250")
+
+title_label = tk.Label(
+    welcome_window,
+    text="Welcome to the Sports Trivia Game!",
+    font=("Arial", 20, "bold")
+)
+title_label.pack(pady=30)
+
+start_button = tk.Button(
+    welcome_window,
+    text="Start Game",
+    font=("Arial", 16),
+    width=15,
+    command=open_category_window
+)
+start_button.pack(pady=20)
+
+
 
 label = tk.Label(window, text="Select Trivia Category")
 label.pack(padx=20)
