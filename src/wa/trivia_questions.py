@@ -1,0 +1,51 @@
+TRIVIA_QUESTIONS = {
+    "Football": {
+        1: {"question":"Which nfl team became the first team to win six superbowls?",
+            "answer":"Steelers"},
+        2: {"question":"Who holds the nfl record for most career passing yards?",
+            "answer":"Chicago"},
+        3: {"question":"What year did the first superbowl take place?",
+            "answer":"1967"},
+        4: {"question":"Which player is known for the famous immaculate reception?",
+            "answer":"Franco Harris"},
+        5: {"question":"Which nfl franchise has the most regular season wins in franchise history?",
+            "answer":"Chicago"}
+
+    },
+    "Soccer": {
+        1: {"question":"Which country has won the most FIFA world cup titles?",
+            "answer":"Brazil"},
+        2: {"question":"Who is the all time leader scorer in UEFA Champions League History?",
+            "answer":"Christiano Ronaldo"},
+        3: {"question":"Which club does the famous stadium Camp Nou belong to?",
+            "answer":"FC Barcalona"},
+        4: {"question":"Which club does the famous stadium Camp Nou belong to?",
+            "answer":["US", "Canada", "Mexico"]},
+        5: {"question":"Who one the Ballon d'Or in 2021?",
+            "answer": "Messi"},
+    },
+    "Baseball": {
+        1: {"question":"Which MLB team has the most world series championships?",
+            "answer":"Yankees"},
+        2: {"question":"Who holds the record for most career home runs",
+            "answer":"Barry Bonds"},
+        3: {"question":"Which pitcher threw a perfect game in the 2010 post season?",
+            "answer":"Roy Halladay"},
+        4: {"question":"What year was the first world series?",
+            "answer":"1903"},
+        5: {"question":"Which MLB team is known as the big red machine?",
+            "answer":"Cinncinati Reds"},
+    },
+    "Basketball": {
+        1: {"question":"Which NBA player holds the record for most career points?",
+            "answer":"Lebron James"},
+        2: {"question":"Who was the first NBA player to win the MVP award unanimously?",
+            "answer":"Stephen Curry"},
+        3: {"question":"Which NBA franchise has won the most championships?",
+            "answer":"Boston Celtics"},
+        4: {"question":"Who was the only coach to win and ncaa and nba championship?",
+            "answer":"Larry Brown"},
+        5:{"question":"Which team drafted Kobe Bryant?",
+           "answer":"Charlotte Hornets"},
+    }
+}
