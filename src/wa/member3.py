@@ -1,19 +1,5 @@
 import tkinter as tk
-
-TRIVIA_QUESTIONS = {
-    "Football": {
-        1: {"question":"Which nfl team became the first team to win six superbowls?",
-            "answer":"Steelers"},
-        2: {"question":"Who holds the nfl record for most career passing yards?",
-            "answer":"Chicago"},
-        3: {"question":"What year did the first superbowl take place?",
-            "answer":"1967"},
-        4: {"question":"Which player is known for the famous immaculate reception?",
-            "answer":"Franco Harris"},
-        5: {"question":"Which nfl franchise has the most regular season wins in franchise history?",
-            "answer":"Chicago"}
-    }
-}
+from trivia_questions import TRIVIA_QUESTIONS
 
 category = "Football"
 questions = [TRIVIA_QUESTIONS[category][i]["question"] for i in range(1, 6)]

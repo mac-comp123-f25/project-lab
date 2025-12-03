@@ -16,10 +16,6 @@ def run_trivia(TRIVIA_QUESTIONS):
 
     print(f"Game over! Score:"
           f" {score}/{total}\n")
-    
-window = tk.Tk()
-welcome_window.title("Welcome to Game On: Sports Trivia Challenge!")
-welcome_window.geometry("450x250")
 
 def choose_category(category):
     window.destroy()
@@ -32,6 +28,29 @@ def choose_category(category):
         run_trivia("Baseball")
     else:
         run_trivia("Basketball")
+
+
+# ------------------- GUI WINDOW ------------------- #
+window = tk.Tk()
+welcome_window.title("Welcome to Game On: Sports Trivia Challenge!")
+welcome_window.geometry("450x250")
+
+title_label = tk.Label(
+    welcome_window,
+    text="Welcome to the Sports Trivia Game!",
+    font=("Arial", 20, "bold")
+)
+title_label.pack(pady=30)
+
+start_button = tk.Button(
+    welcome_window,
+    text="Start Game",
+    font=("Arial", 16),
+    width=15,
+    command=open_category_window
+)
+start_button.pack(pady=20)
+
 
 
 label = tk.Label(window, text="Select Trivia Category")
