@@ -22,7 +22,7 @@ TRIVIA_QUESTIONS = {
         4: {"question":"Which club does the famous stadium Camp Nou belong to?",
             "answer":["US", "Canada", "Mexico"]},
         5: {"question":"Who one the Ballon d'Or in 2021?",
-            "answer": "Lionel"},
+            "answer": "Lionel Messi"},
     },
     "Baseball": {
         1: {"question":"Which MLB team has the most world series championships?",
