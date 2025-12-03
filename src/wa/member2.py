@@ -5,6 +5,9 @@ def run_trivia(TRIVIA_QUESTIONS):
     score = 0
     total = len(TRIVIA_QUESTIONS)
 
+    print("Welcome to Game On: Sports Trivia Game!")
+    print(f"There are {total_questions} questions.\n")
+
     for question in TRIVIA_QUESTIONS.items():
         user = input(question).strip().lower()
 
@@ -14,8 +17,10 @@ def run_trivia(TRIVIA_QUESTIONS):
         else:
             print (f"Wrong. Correct answer: {answer}\n")
 
-    print(f"Game over! Score:"
-          f" {score}/{total}\n")
+    print(f"Game over! Final score: {score}/{total}")
+
+if __name__ == "__main__":
+    run_trivia()
 
 def choose_category(category):
     window.destroy()
@@ -32,37 +37,18 @@ def choose_category(category):
 
 # ------------------- GUI WINDOW ------------------- #
 window = tk.Tk()
-welcome_window.title("Welcome to Game On: Sports Trivia Challenge!")
-welcome_window.geometry("450x250")
+window.title("Select Trivia Category")
+window.geometry("350x200")
 
-title_label = tk.Label(
-    welcome_window,
-    text="Welcome to the Sports Trivia Game!",
-    font=("Arial", 20, "bold")
-)
-title_label.pack(pady=30)
-
-start_button = tk.Button(
-    welcome_window,
-    text="Start Game",
-    font=("Arial", 16),
-    width=15,
-    command=open_category_window
-)
-start_button.pack(pady=20)
-
-
-
-label = tk.Label(window, text="Select Trivia Category")
-label.pack(padx=20)
+label = tk.Label(window, text="Choose a category:", font=("Arial", 14))
+label.pack(pady=20)
 
 buttons = [
-("Football", "football"),
+    ("Football", "football"),
     ("Soccer", "soccer"),
     ("Baseball", "baseball"),
     ("Basketball", "basketball"),
 ]
-
 
 for text, cat in buttons:
     btn = tk.Button(
@@ -75,7 +61,6 @@ for text, cat in buttons:
     btn.pack(pady=5)
 
 window.mainloop()
-
 
 
 
