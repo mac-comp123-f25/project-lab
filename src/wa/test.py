@@ -68,6 +68,9 @@ class TriviaApp:
         self.entry.pack(pady=10)
         self.entry.focus()
 
+        self.correct_label = tk.Label(self.root, text="", font=("Arial", 12), fg="green")
+        self.correct_label.pack(pady=5)
+
         submit_btn = tk.Button(self.root, text="Submit Answer", font=("Arial", 14), command=self.check_answer)
         submit_btn.pack(pady=10)
 
@@ -78,16 +81,21 @@ class TriviaApp:
 
         if isinstance(correct, list):
             is_correct = user_answer in correct
+            correct_text = ", ".join(correct)
         else:
             is_correct = user_answer == correct
+            correct_text = correct
 
-        # Turn entry green/red
-        self.entry.config(bg="green" if is_correct else "red")
         if is_correct:
+            self.entry.config(bg="green")
+            self.correct_label.config(text="")  # No label if correct
             self.score += 1
+        else:
+            self.entry.config(bg="red")
+            self.correct_label.config(text=f"Correct Answer: {correct_text}")  # SHOW correct answer
 
         # Wait a short moment then move to next question
-        self.root.after(800, self.next_question)
+        self.root.after(1500, self.next_question)
 
     def next_question(self):
         self.current_index += 1
