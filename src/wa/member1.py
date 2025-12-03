@@ -47,7 +47,7 @@ TRIVIA_QUESTIONS = {
             "answer":"Christiano Ronaldo"},
         3: {"question":"Which club does the famous stadium Camp Nou belong to?",
             "answer":"FC Barcalona"},
-        4: {"question":"Which club does the famous stadium Camp Nou belong to?",
+        4: {"question":"Name one nation that will host the 2026 FIFA World Cup",
             "answer":["US", "Canada", "Mexico"]},
         5: {"question":"Who one the Ballon d'Or in 2021?",
             "answer": "Messi"},
