@@ -16,7 +16,6 @@ class TriviaApp:
 
         self.show_welcome_screen()
 
-    # ---------- Welcome Screen ---------- #
     def show_welcome_screen(self):
         self.clear_window()
         title_label = tk.Label(self.root, text="Welcome to Sports Trivia!", font=("Arial", 20, "bold"))
@@ -25,7 +24,6 @@ class TriviaApp:
         start_btn = tk.Button(self.root, text="Start Game", font=("Arial", 16), command=self.show_category_screen)
         start_btn.pack(pady=20)
 
-    # ---------- Category Selection ---------- #
     def show_category_screen(self):
         self.clear_window()
         label = tk.Label(self.root, text="Select Trivia Category", font=("Arial", 16))
@@ -36,7 +34,6 @@ class TriviaApp:
                             command=lambda c=category: self.start_category(c))
             btn.pack(pady=5)
 
-    # ---------- Start Selected Category ---------- #
     def start_category(self, category):
         self.category = category
         self.questions = [TRIVIA_QUESTIONS[category][i]["question"] for i in range(1, 6)]
@@ -51,7 +48,6 @@ class TriviaApp:
         self.score = 0
         self.show_question()
 
-    # ---------- Show One Question ---------- #
     def show_question(self):
         self.clear_window()
         if self.current_index >= len(self.questions):
@@ -74,7 +70,6 @@ class TriviaApp:
         submit_btn = tk.Button(self.root, text="Submit Answer", font=("Arial", 14), command=self.check_answer)
         submit_btn.pack(pady=10)
 
-    # ---------- Check Answer and Move Next ---------- #
     def check_answer(self):
         user_answer = self.entry.get().strip().lower()
         correct = self.answers[self.current_index]
@@ -88,25 +83,22 @@ class TriviaApp:
 
         if is_correct:
             self.entry.config(bg="green")
-            self.correct_label.config(text="")  # No label if correct
+            self.correct_label.config(text="")
             self.score += 1
         else:
             self.entry.config(bg="red")
-            self.correct_label.config(text=f"Correct Answer: {correct_text}")  # SHOW correct answer
+            self.correct_label.config(text=f"Correct Answer: {correct_text}")  
 
-        # Wait a short moment then move to next question
         self.root.after(1500, self.next_question)
 
     def next_question(self):
         self.current_index += 1
         self.show_question()
 
-    # ---------- Utility ---------- #
     def clear_window(self):
         for widget in self.root.winfo_children():
             widget.destroy()
 
-# ------------------- RUN APP ------------------- #
 if __name__ == "__main__":
     root = tk.Tk()
     app = TriviaApp(root)
