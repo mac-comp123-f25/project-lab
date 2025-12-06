@@ -1,4 +1,4 @@
-# Project Title
+# Game On: Sports Trivia Challenge
 
 Check the project requirements for what should go into this file.
 
