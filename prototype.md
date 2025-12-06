@@ -1,3 +1,3 @@
-# Project Title
+# Game On: Sports Trivia Challenge Prototype
 
-Check the project requirements for what should go into this file.
+* We added the drawing of our prototype to the repo, titled "LAB.Prototype.pdf"

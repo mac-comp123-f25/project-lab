@@ -1,15 +1,24 @@
-# Project Title
+# Game On: Sports Trivia Challenge
 
 Check the project requirements for details what should go into this file.  Below is an outline.
 
 ## Members
 
-- Member 1 first name and last name initial
-- Member 2 first name and last name initial
-- Member 3 first name and last name initial
+- Becky M
+- Abigail H
+- Lizzie J
 
 ## Description
-
+We are planning to make a sports trivia game. 
+We will use if statements to determine right or wrong answers. 
+We create a set dictionary of questions and their correct responses.
 
 ## Inspirations Behind
+We all play sports and love trivia! 
+We want more people to learn more about sports. 
 
+## Plan
+We will separate the assignment into three main tasks; 
+1. Research on sports trivia to come up with questions and answers. 
+2. Create a dictionary corresponding to correct responses. 
+3. Write if statements to confirm right or wrong answers. 
