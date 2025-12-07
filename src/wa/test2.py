@@ -85,7 +85,6 @@ class TriviaApp:
             btn.pack(pady=10)
 
     def start_category(self, category):
-        # LOGIC UNCHANGED
         self.category = category
 
         self.questions = []
