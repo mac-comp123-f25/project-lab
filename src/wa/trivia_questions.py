@@ -43,12 +43,10 @@ TRIVIA_QUESTIONS = {
                 "display": "FC Barcelona",
                 "accepted": ["FC Barcelona", "Barcelona"]
             }},
-        4: {"question": "Which countries will host the upcoming 2026 Men's World Cup?",
+        4: {"question": "Name one of the countries that will host the upcoming 2026 Men's World Cup?",
             "answer": {
-                # ONE official display string
                 "display": "US, Canada, Mexico",
-                # used for logic; we’ll treat this as “must contain all three”
-                "accepted": ["US", "Canada", "Mexico"]
+                "accepted": ["US", "United States", "USA", "Canada", "Mexico"]
             }},
         5: {"question": "Who won the Ballon d'Or in 2021?",
             "answer": {
