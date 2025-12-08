@@ -3,11 +3,13 @@ import random
 from tkinter import messagebox
 from trivia_questions import TRIVIA_QUESTIONS
 
+
 class TriviaApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Sports Trivia Game")
-        self.root.geometry("900x450")
+        self.root.geometry("1000x600")
+        self.root.configure(bg="#1e1e2f")
 
         self.category = None
         self.questions = []
@@ -19,23 +21,68 @@ class TriviaApp:
 
         self.show_welcome_screen()
 
+    # ---------- UI HELPERS ----------
+    def card(self):
+        frame = tk.Frame(self.root, bg="#2c2c44", padx=40, pady=30)
+        frame.place(relx=0.5, rely=0.5, anchor="center")
+        return frame
+
+    def big_button(self, parent, text, command):
+        return tk.Button(
+            parent,
+            text=text,
+            command=command,
+            font=("Helvetica", 20, "bold"),
+            bg="#0057FF",
+            fg="white",
+            activebackground="#003FCC",
+            activeforeground="white",
+            relief="solid",
+            borderwidth=3,
+            highlightthickness=0,
+            cursor="hand2",
+            padx=40,
+            pady=16,
+            width=24
+        )
+
+    # ---------- SCREENS ----------
     def show_welcome_screen(self):
         self.clear_window()
-        title_label = tk.Label(self.root, text="Welcome to Sports Trivia!", font=("Arial", 20, "bold"))
-        title_label.pack(pady=30)
+        frame = self.card()
 
-        start_btn = tk.Button(self.root, text="Start Game", font=("Arial", 16), command=self.show_category_screen)
+        title_label = tk.Label(
+            frame,
+            text="🏆 Welcome to Sports Trivia!",
+            font=("Helvetica", 28, "bold"),
+            bg="#2c2c44",
+            fg="white"
+        )
+        title_label.pack(pady=20)
+
+        start_btn = self.big_button(frame, "Start Game", self.show_category_screen)
         start_btn.pack(pady=20)
 
     def show_category_screen(self):
         self.clear_window()
-        label = tk.Label(self.root, text="Select Trivia Category", font=("Arial", 16))
-        label.pack(pady=20)
+        frame = self.card()
+
+        label = tk.Label(
+            frame,
+            text="Select Trivia Category",
+            font=("Helvetica", 22, "bold"),
+            bg="#2c2c44",
+            fg="white"
+        )
+        label.pack(pady=15)
 
         for category in TRIVIA_QUESTIONS.keys():
-            btn = tk.Button(self.root, text=category, font=("Arial", 14), width=20,
-                            command=lambda c=category: self.start_category(c))
-            btn.pack(pady=5)
+            btn = self.big_button(
+                frame,
+                category,
+                lambda c=category: self.start_category(c)
+            )
+            btn.pack(pady=10)
 
     def start_category(self, category):
         self.category = category
@@ -48,14 +95,13 @@ class TriviaApp:
         self.score = 0
 
         qa_pairs = []
-        for i in range (1, 6):
+        for i in range(1, 6):
             q = TRIVIA_QUESTIONS[category][i]["question"]
             ans = TRIVIA_QUESTIONS[category][i]["answer"]
 
             if isinstance(ans, dict):
                 display_answer = ans["display"]
                 normalized = [a.lower() for a in ans["accepted"]]
-
             elif isinstance(ans, list):
                 display_answer = ans[0]
                 normalized = [a.lower() for a in ans]
@@ -79,20 +125,45 @@ class TriviaApp:
             self.show_summary_screen()
             return
 
+        frame = self.card()
         question_text = self.questions[self.current_index]
 
-        self.label = tk.Label(self.root, text=f"Q{self.current_index + 1}: {question_text}", wraplength=500, font=("Arial", 14))
+        self.label = tk.Label(
+            frame,
+            text=f"Q{self.current_index + 1}: {question_text}",
+            wraplength=750,
+            font=("Helvetica", 18),
+            bg="#2c2c44",
+            fg="white",
+            justify="center"
+        )
         self.label.pack(pady=20)
 
-        self.entry = tk.Entry(self.root, width=30, font=("Arial", 14))
-        self.entry.pack(pady=10)
+        self.entry = tk.Entry(
+            frame,
+            width=30,
+            font=("Helvetica", 18),
+            relief="solid",
+            borderwidth=2,
+            justify="center",
+            bg="black",
+            fg="white",
+            insertbackground="white"
+        )
+        self.entry.pack(pady=15)
         self.entry.focus()
 
-        self.correct_label = tk.Label(self.root, text="", font=("Arial", 12), fg="green")
-        self.correct_label.pack(pady=5)
+        self.correct_label = tk.Label(
+            frame,
+            text="",
+            font=("Helvetica", 14),
+            bg="#2c2c44",
+            fg="#ff7070"
+        )
+        self.correct_label.pack(pady=8)
 
-        submit_btn = tk.Button(self.root, text="Submit Answer", font=("Arial", 14), command=self.check_answer)
-        submit_btn.pack(pady=10)
+        submit_btn = self.big_button(frame, "Submit Answer", self.check_answer)
+        submit_btn.pack(pady=20)
 
     def check_answer(self):
         user = self.entry.get().strip()
@@ -107,11 +178,11 @@ class TriviaApp:
             is_correct = user_answer == correct
 
         if is_correct:
-            self.entry.config(bg="green")
-            self.correct_label.config(text="")
+            self.entry.config(bg="#7CFC90")
+            self.correct_label.config(text="✅ Correct!")
             self.score += 1
         else:
-            self.entry.config(bg="red")
+            self.entry.config(bg="#ffb3b3")
             self.correct_label.config(text=f"Correct Answer: {display_correct}")
 
         self.results.append({
@@ -123,54 +194,59 @@ class TriviaApp:
 
         self.root.after(1500, self.next_question)
 
-
     def next_question(self):
         self.current_index += 1
         self.show_question()
 
     def show_summary_screen(self):
         self.clear_window()
+        frame = self.card()
 
-        title = tk.Label(self.root, text="Game Over!", font=("Arial", 20, "bold"))
+        title = tk.Label(
+            frame,
+            text="🎉 Game Over!",
+            font=("Helvetica", 26, "bold"),
+            bg="#2c2c44",
+            fg="white"
+        )
         title.pack(pady=10)
 
         score_label = tk.Label(
-            self.root,
+            frame,
             text=f"Your score: {self.score}/{len(self.questions)}",
-            font=("Arial", 14)
+            font=("Helvetica", 16),
+            bg="#2c2c44",
+            fg="#bbbbbb"
         )
         score_label.pack(pady=5)
 
-        summary_frame = tk.Frame(self.root)
-        summary_frame.pack(pady=10, fill="both", expand=True)
+        summary_frame = tk.Frame(frame, bg="#2c2c44")
+        summary_frame.pack(pady=15, fill="both", expand=True)
 
         headers = ["Q#", "Question", "Your Answer", "Correct Answer", "Result"]
-        widths = [5, 50, 20, 30, 10]
+        widths = [5, 40, 18, 25, 10]
 
         for col, (header, width) in enumerate(zip(headers, widths)):
             tk.Label(
                 summary_frame,
                 text=header,
-                font=("Arial", 12, "bold"),
+                font=("Helvetica", 12, "bold"),
+                bg="#3a3a5c",
+                fg="white",
                 borderwidth=1,
                 relief="solid",
-                width=width,
-                wraplength=300
-            ).grid(row=0, column=col, padx=1, pady=1)
+                width=width
+            ).grid(row=0, column=col, padx=2, pady=2)
 
-        # Table rows
         for idx, res in enumerate(self.results, start=1):
-            question = res["question"]
-            user_ans = res["user_answer"]
-            correct_ans = res["correct_answer"]
+            color = "#7CFC90" if res["is_correct"] else "#ff9999"
             result_text = "Correct" if res["is_correct"] else "Incorrect"
-            color = "green" if res["is_correct"] else "red"
 
             row_data = [
                 str(idx),
-                question,
-                user_ans,
-                correct_ans if not res["is_correct"] else "",
+                res["question"],
+                res["user_answer"],
+                "" if res["is_correct"] else res["correct_answer"],
                 result_text
             ]
 
@@ -178,8 +254,9 @@ class TriviaApp:
                 tk.Label(
                     summary_frame,
                     text=value,
-                    font=("Arial", 11),
-                    fg=color if col == 4 else "black",
+                    font=("Helvetica", 11),
+                    bg="#2c2c44",
+                    fg=color if col == 4 else "white",
                     borderwidth=1,
                     relief="solid",
                     width=widths[col],
@@ -187,20 +264,17 @@ class TriviaApp:
                     justify="center"
                 ).grid(row=idx, column=col, padx=1, pady=1)
 
-        back_btn = tk.Button(
-            self.root,
-            text="Back to Categories",
-            font=("Arial", 14),
-            command=self.show_category_screen
-        )
-        back_btn.pack(pady=15)
-
+        back_btn = self.big_button(frame, "Back to Categories", self.show_category_screen)
+        back_btn.pack(pady=20)
 
     def clear_window(self):
         for widget in self.root.winfo_children():
             widget.destroy()
 
+
 if __name__ == "__main__":
     root = tk.Tk()
     app = TriviaApp(root)
     root.mainloop()
+
+
